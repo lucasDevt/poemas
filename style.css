@@ -1,0 +1,477 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #0b0d12;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    color: #eef2ff;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ==========================================
+           TIPOGRAFIA
+        ========================================== */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==========================================
+           HEADER COM BLUR
+        ========================================== */
+.site-header {
+    background-color: rgba(11, 13, 18, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0.9rem 0;
+}
+
+.header-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+}
+
+.logo a {
+    font-size: 1.7rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-links a {
+    transition: color 0.2s;
+    color: #b9c3d4;
+}
+
+.nav-links a:hover {
+    color: #c4b5fd;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #171b23;
+    border-radius: 40px;
+    padding: 0.45rem 1rem;
+    border: 1px solid #252b36;
+    transition: all 0.2s;
+}
+
+.search-box:hover {
+    border-color: #6d5c9e;
+    background-color: #1e232c;
+}
+
+.search-icon {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    opacity: 0.6;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: #eef2ff;
+    font-size: 0.85rem;
+    outline: none;
+    width: 150px;
+}
+
+.search-box input::placeholder {
+    color: #5e6678;
+}
+
+/* ==========================================
+           SEÇÃO PRINCIPAL (GRADE)
+        ========================================== */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin: 2.5rem 0 1.8rem 0;
+    border-bottom: 1px solid #1f242f;
+    padding-bottom: 0.75rem;
+}
+
+.section-header h2 {
+    border-left: 4px solid #a78bfa;
+    padding-left: 1rem;
+}
+
+.more-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #a78bfa;
+}
+
+/* Grid de cards */
+.poems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Card estilo Letterboxd */
+.card {
+    position: relative;
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #11141c;
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(167, 139, 250, 0.3);
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 2 / 2.8;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.35s ease, transform 0.4s ease;
+}
+
+.card:hover .card-image img {
+    filter: brightness(0.45) blur(1.2px);
+    transform: scale(1.02);
+}
+
+/* Overlay com título no hover */
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    background: rgba(10, 12, 16, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    width: 85%;
+    transform: translateY(12px);
+    transition: transform 0.25s ease;
+}
+
+.card:hover .card-title {
+    transform: translateY(0);
+}
+
+/* Estatísticas minimalistas */
+.card-stats {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    padding: 0.35rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.card-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* ==========================================
+           MODAL (sem JavaScript, usando :target)
+        ========================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.25s ease;
+}
+
+.modal:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #0f1219;
+    border-radius: 32px;
+    max-width: 850px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2rem;
+    position: relative;
+    border: 1px solid #2a2f3a;
+    box-shadow: 0 30px 40px -20px black;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Scroll personalizado */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #1a1e26;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #a78bfa;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #b9c3d4;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: #a78bfa;
+}
+
+/* Estrutura interna do modal */
+.modal-poema-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+    margin-bottom: 1.8rem;
+    align-items: flex-start;
+}
+
+.modal-capa {
+    flex: 1;
+    min-width: 140px;
+    max-width: 200px;
+}
+
+.modal-capa img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px -5px black;
+    border: 1px solid #2a2f3a;
+}
+
+.modal-info {
+    flex: 2;
+}
+
+.modal-info h3 {
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #fff, #c4b5fd);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.3rem;
+}
+
+.modal-autor {
+    color: #a78bfa;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.poema-texto-modal {
+    background: #0b0e14;
+    padding: 1.3rem;
+    border-radius: 20px;
+    margin: 1.2rem 0;
+    font-style: italic;
+    line-height: 1.7;
+    color: #e0e6f0;
+    white-space: pre-line;
+    border-left: 3px solid #a78bfa;
+}
+
+.reflexao-modal {
+    background: #0a0d13;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.reflexao-item-modal {
+    margin-bottom: 1rem;
+}
+
+.reflexao-item-modal h4 {
+    font-size: 1rem;
+    color: #c4b5fd;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.reflexao-item-modal p {
+    color: #b9c3d4;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ==========================================
+           FOOTER
+        ========================================== */
+.site-footer {
+    width: 100%;
+    position: fixed;
+    border-top: 1px solid #1a1f28;
+    padding: 2rem 0;
+    text-align: center;
+    color: #5e6678;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    bottom: 0;
+}
+
+/* ==========================================
+           RESPONSIVIDADE
+        ========================================== */
+@media (max-width: 800px) {
+    .container {
+        padding: 0 1.2rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .search-box {
+        align-self: center;
+    }
+
+    .poems-grid {
+        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    .modal-info h3 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .modal-poema-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .modal-capa {
+        max-width: 160px;
+    }
+}

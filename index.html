@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ecos da Alma | Poemas autorais</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-content">
+        <div class="logo">
+            <a href="#">✦ Ecos da Alma</a>
+        </div>
+        <nav class="nav-links">
+            <a href="#">Início</a>
+            <a href="#">Poemas</a>
+            <a href="#">Sobre</a>
+            <a href="#">Coleções</a>
+        </nav>
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Buscar poema...">
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-header">
+            <h2>📜 Poemas em destaque esta semana</h2>
+            <a href="#" class="more-link">MAIS +</a>
+        </div>
+
+        <!-- Grid de cards (cada card abre um modal específico via #id) -->
+        <div class="poems-grid">
+            <!-- Poema 1 -->
+            <a href="#modal-poema1" class="card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/id/20/400/560" alt="Capa: O Silêncio das Horas">
+                </div>
+                <div class="card-overlay">
+                    <div class="card-title">O Silêncio das Horas</div>
+                </div>
+                <div class="card-stats">
+                    <span>❤️ 293K</span>
+                    <span>👁️ 2.2M</span>
+                    <span>📖 4 min</span>
+                </div>
+            </a>
+
+            <!-- Poema 2 -->
+            <a href="#modal-poema2" class="card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/id/42/400/560" alt="Capa: Chuva nos Vidros">
+                </div>
+                <div class="card-overlay">
+                    <div class="card-title">Chuva nos Vidros</div>
+                </div>
+                <div class="card-stats">
+                    <span>❤️ 890K</span>
+                    <span>👁️ 4.1M</span>
+                    <span>📖 3 min</span>
+                </div>
+            </a>
+
+            <!-- Poema 3 -->
+            <a href="#modal-poema3" class="card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/id/95/400/560" alt="Capa: Labirinto Interior">
+                </div>
+                <div class="card-overlay">
+                    <div class="card-title">Labirinto Interior</div>
+                </div>
+                <div class="card-stats">
+                    <span>❤️ 128K</span>
+                    <span>👁️ 980K</span>
+                    <span>📖 5 min</span>
+                </div>
+            </a>
+
+            <!-- Poema 4 -->
+            <a href="#modal-poema4" class="card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/id/96/400/560" alt="Capa: Última Canção">
+                </div>
+                <div class="card-overlay">
+                    <div class="card-title">Última Canção</div>
+                </div>
+                <div class="card-stats">
+                    <span>❤️ 456K</span>
+                    <span>👁️ 2.8M</span>
+                    <span>📖 3 min</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- ==========================================
+     MODAIS (UM PARA CADA POEMA)
+========================================== -->
+
+<!-- MODAL POEMA 1 -->
+<div id="modal-poema1" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-modal">&times;</a>
+        <div class="modal-poema-header">
+            <div class="modal-capa">
+                <img src="https://picsum.photos/id/20/600/700" alt="O Silêncio das Horas">
+            </div>
+            <div class="modal-info">
+                <h3>O Silêncio das Horas</h3>
+                <div class="modal-autor">por Sofia Lunar</div>
+            </div>
+        </div>
+        <div class="poema-texto-modal">
+            O tempo escorre em gotas de agulha,<br>
+            cada segundo perfura a pele calma.<br>
+            No silêncio das horas, a alma<br>
+            aprende a ouvir a própria culpa.<br><br>
+            Relógios de parede guardam suspiros,<br>
+            ponteiros dançam sobre cicatrizes frias.<br>
+            E eu, aqui, contando os fios<br>
+            que tecem tardes sem destino e mentiras.
+        </div>
+        <div class="reflexao-modal">
+            <div class="reflexao-item-modal">
+                <h4>✍️ O que eu estava pensando ao escrever</h4>
+                <p>Lembranças de noites insones, o barulho do tique-taque me levou a refletir sobre como o tempo nos molda silenciosamente. Quis traduzir essa pressão invisível que sentimos ao ver os dias passarem sem respostas.</p>
+            </div>
+            <div class="reflexao-item-modal">
+                <h4>💡 Ideia do poema</h4>
+                <p>A ideia surgiu durante uma madrugada chuvosa, observando um relógio antigo na parede. O poema brinca com a metáfora do tempo como algo que fere e ao mesmo tempo cura – um silêncio que fala mais do que palavras.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL POEMA 2 -->
+<div id="modal-poema2" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-modal">&times;</a>
+        <div class="modal-poema-header">
+            <div class="modal-capa">
+                <img src="https://picsum.photos/id/42/600/700" alt="Chuva nos Vidros">
+            </div>
+            <div class="modal-info">
+                <h3>Chuva nos Vidros</h3>
+                <div class="modal-autor">por Sofia Lunar</div>
+            </div>
+        </div>
+        <div class="poema-texto-modal">
+            A chuva desenha mapas no vidro,<br>
+            rotas líquidas que nunca levarei.<br>
+            Cada gota, um compromisso antigo<br>
+            com os dias em que ainda te esperei.<br><br>
+            A cidade lá fora é só borrão,<br>
+            e dentro de mim, a mesma inundação.
+        </div>
+        <div class="reflexao-modal">
+            <div class="reflexao-item-modal">
+                <h4>✍️ O que eu estava pensando ao escrever</h4>
+                <p>Numa tarde de temporal, senti que a chuva lavava não só as ruas, mas também lembranças que preferia esquecer. O poema é um retrato desse paradoxo entre purificação e melancolia.</p>
+            </div>
+            <div class="reflexao-item-modal">
+                <h4>💡 Ideia do poema</h4>
+                <p>Utilizar a chuva como metáfora da memória afetiva – os vidros embaçados representam a dificuldade de enxergar o presente quando o passado ainda escorre.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL POEMA 3 -->
+<div id="modal-poema3" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-modal">&times;</a>
+        <div class="modal-poema-header">
+            <div class="modal-capa">
+                <img src="https://picsum.photos/id/95/600/700" alt="Labirinto Interior">
+            </div>
+            <div class="modal-info">
+                <h3>Labirinto Interior</h3>
+                <div class="modal-autor">por Sofia Lunar</div>
+            </div>
+        </div>
+        <div class="poema-texto-modal">
+            Dentro de mim há um labirinto<br>
+            sem fio de Ariadne nem vitral.<br>
+            Esqueci onde deixei o instinto,<br>
+            vagueio à procura de um sinal.<br><br>
+            As paredes mudam de lugar,<br>
+            e cada espelho mente um final.<br>
+            Talvez o centro seja o próprio errar.
+        </div>
+        <div class="reflexao-modal">
+            <div class="reflexao-item-modal">
+                <h4>✍️ O que eu estava pensando ao escrever</h4>
+                <p>Sentimentos de ansiedade e dúvida sobre decisões do passado. O labirinto representa a mente humana quando se perde em suas próprias construções.</p>
+            </div>
+            <div class="reflexao-item-modal">
+                <h4>💡 Ideia do poema</h4>
+                <p>Explorar a ideia de que a saída do labirinto não é um lugar, mas uma aceitação do percurso. Usei símbolos do mito do Minotauro de forma invertida.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL POEMA 4 -->
+<div id="modal-poema4" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-modal">&times;</a>
+        <div class="modal-poema-header">
+            <div class="modal-capa">
+                <img src="https://picsum.photos/id/96/600/700" alt="Última Canção">
+            </div>
+            <div class="modal-info">
+                <h3>Última Canção</h3>
+                <div class="modal-autor">por Sofia Lunar</div>
+            </div>
+        </div>
+        <div class="poema-texto-modal">
+            O violino desafina na despedida,<br>
+            as notas caem como folhas de outono.<br>
+            Esta canção não salva vidas,<br>
+            apenas embala o abandono.<br><br>
+            Mas antes que o último acorde morra,<br>
+            quero dançar no teu deserto.<br>
+            A beleza também se acolhe na derrota.
+        </div>
+        <div class="reflexao-modal">
+            <div class="reflexao-item-modal">
+                <h4>✍️ O que eu estava pensando ao escrever</h4>
+                <p>O poder da música como último refúgio emocional. Escrevi após assistir a um concerto de despedida; o silêncio depois da última nota me tocou profundamente.</p>
+            </div>
+            <div class="reflexao-item-modal">
+                <h4>💡 Ideia do poema</h4>
+                <p>Relacionar o fim de um relacionamento com uma peça musical inacabada. O violino desafinado simboliza a imperfeição humana e a beleza que ainda assim persiste.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>✦ Ecos da Alma – Poesia visual | Inspirado em galerias de arte e cinema ✦</p>
+        <p style="margin-top: 0.5rem; font-size: 0.7rem;">© 2025 · Todos os poemas são autorais</p>
+    </div>
+</footer>
+
+</body>
+</html>
