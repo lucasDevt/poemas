@@ -1,121 +1,55 @@
-// ================= TEXTO DIGITANDO =================
-const phrases = [
-    "Ecos da Alma",
-    "onde o silêncio escreve",
-    "e a dor vira verso"
-];
+// ================= FIREBASE =================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-let phraseIndex = 0;
-let charIndex = 0;
-let currentText = "";
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-function typeLoop() {
-    if (charIndex < phrases[phraseIndex].length) {
-        currentText += phrases[phraseIndex].charAt(charIndex);
-        document.getElementById("typing-text").innerHTML = currentText;
-        charIndex++;
-        setTimeout(typeLoop, 80);
-    } else {
-        setTimeout(() => {
-            currentText = "";
-            charIndex = 0;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typeLoop();
-        }, 2000);
-    }
-}
+const firebaseConfig = {
+    apiKey: "AIzaSyCfA...",
+    authDomain: "biblioteca-78f44.firebaseapp.com",
+    databaseURL: "https://biblioteca-78f44-default-rtdb.firebaseio.com",
+    projectId: "biblioteca-78f44",
+    storageBucket: "biblioteca-78f44.firebasestorage.app",
+    messagingSenderId: "715514751731",
+    appId: "1:715514751731:web:0c65f5f5e79d8e878de586"
+};
 
-// ================= CHUVA =================
-const canvas = document.getElementById("rain-canvas");
-const ctx = canvas.getContext("2d");
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-function resizeCanvas() {
-    const section = document.querySelector(".poems-section");
-    canvas.width = section.offsetWidth;
-    canvas.height = section.offsetHeight;
-}
+// ================= BUSCAR DO FIREBASE =================
+function carregarPoemas() {
+    const poemasRef = ref(db, "poemas");
 
-let drops = [];
+    onValue(poemasRef, (snapshot) => {
+        const data = snapshot.val();
 
-function initRain() {
-    drops = [];
-    for (let i = 0; i < 120; i++) {
-        drops.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            length: Math.random() * 20 + 10,
-            speed: Math.random() * 4 + 3
-        });
-    }
-}
-
-function drawRain() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.strokeStyle = "rgba(200, 200, 255, 0.3)";
-    ctx.lineWidth = 1;
-
-    for (let drop of drops) {
-        ctx.beginPath();
-        ctx.moveTo(drop.x, drop.y);
-        ctx.lineTo(drop.x, drop.y + drop.length);
-        ctx.stroke();
-
-        drop.y += drop.speed;
-
-        if (drop.y > canvas.height) {
-            drop.y = -20;
-            drop.x = Math.random() * canvas.width;
+        if (!data) {
+            document.getElementById("poems-grid").innerHTML = "<p>Sem poemas ainda...</p>";
+            return;
         }
-    }
 
-    requestAnimationFrame(drawRain);
+        // transforma objeto em array
+        const poems = Object.values(data);
+
+        renderPoems(poems);
+    });
 }
 
-// ================= DADOS (SIMULA BACKEND) =================
-// const poems = [
-//     {
-//         id: 1,
-//         titulo: "Chuva nos Vidros",
-//         autor: "Sofia Lunar",
-//         imagem: "https://picsum.photos/id/42/400/560",
-//         texto: `A chuva desenha mapas no vidro,
-// rotas líquidas que nunca levarei.
-// Cada gota, um compromisso antigo
-// com os dias em que ainda te esperei.
-
-// A cidade lá fora é só borrão,
-// e dentro de mim, a mesma inundação.`,
-//         pensando: "O vidro representa o presente embaçado.",
-//         ideia: "A chuva como memória emocional.",
-
-//     },
-
-//     {
-//         id: 2,
-//         titulo: "Labirinto Interior",
-//         autor: "Sofia Lunar",
-//         imagem: "https://picsum.photos/id/95/400/560",
-//         texto: `Dentro de mim há um labirinto
-// sem fio de Ariadne nem vitral.
-// Esqueci onde deixei o instinto,
-// vagueio à procura de um sinal.`,
-//         pensando: "O erro como caminho.",
-//         ideia: "Ansiedade e escolhas.",
-
-//     }
-// ];
-
-const poems = JSON.parse(localStorage.getItem("poema"));
-
-// ================= RENDERIZAÇÃO =================
-function renderPoems() {
+// ================= RENDER =================
+function renderPoems(poems) {
     const grid = document.getElementById("poems-grid");
     const modalContainer = document.getElementById("modal-container");
 
-    poems.forEach(poema => {
+    grid.innerHTML = "";
+    modalContainer.innerHTML = "";
 
-        // CARD
+    // mais recentes primeiro
+    poems.reverse().forEach(poema => {
+
         const card = document.createElement("a");
         card.href = `#modal-${poema.id}`;
         card.className = "card";
@@ -129,12 +63,10 @@ function renderPoems() {
                 <h3>${poema.titulo}</h3>
                 <p>${poema.poema.slice(0, 50)}...</p>
             </div>
-       
         `;
 
         grid.appendChild(card);
 
-        // MODAL
         const modal = document.createElement("div");
         modal.id = `modal-${poema.id}`;
         modal.className = "modal";
@@ -154,7 +86,7 @@ function renderPoems() {
                 </div>
 
                 <div class="poema-texto-modal">
-                    ${poema.texto}
+                    ${poema.poema}
                 </div>
 
                 <div class="reflexao-modal">
@@ -164,7 +96,7 @@ function renderPoems() {
                     </div>
                     <div class="reflexao-item-modal">
                         <h4>💡 Ideia</h4>
-                        <p>${poema.pensando}</p>
+                        <p>${poema.pensamento}</p>
                     </div>
                 </div>
             </div>
@@ -176,16 +108,5 @@ function renderPoems() {
 
 // ================= INIT =================
 window.addEventListener("load", () => {
-    typeLoop();
-
-    resizeCanvas();
-    initRain();
-    drawRain();
-
-    renderPoems();
-});
-
-window.addEventListener("resize", () => {
-    resizeCanvas();
-    initRain();
+    carregarPoemas();
 });
