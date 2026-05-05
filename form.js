@@ -1,5 +1,3 @@
-const file_input = document.getElementById("imagem");
-const file = file_input.files[0];
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -21,18 +19,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app)
 
-let image_base = "";
-if (file) {
-    const header = new FileReader();
-    header.onload = function (e) {
-        enviar_poema(e.target.result)
-    }
-    header.readAsDataURL(file)
-} else {
-    enviar_poema("https://i.postimg.cc/mkWcdH69/image.png")
-}
+document.getElementById("poema_form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const file_input = document.getElementById("imagem");
+    const file = file_input.files[0]
 
-function enviar_poema(image_final) {
+    if (file) {
+        const header = new FileReader();
+        header.onload = function (e) {
+            enviar_poema(e.target.result)
+        }
+        header.readAsDataURL(file)
+    } else {
+        enviar_poema("https://i.postimg.cc/mkWcdH69/image.png")
+    }
+})
+
+
+async function enviar_poema(image_final) {
     const new_poema = {
         id: Date.now(),
         titulo: document.getElementById("titulo").value,
@@ -42,8 +46,13 @@ function enviar_poema(image_final) {
         ideia: document.getElementById("ideia").value,
         pensamento: document.getElementById("pensamento").value
     };
-    let poema = JSON.parse(localStorage.getItem("poema"));
-    poema.push(new_poema)
-    localStorage.setItem("poema", JSON.stringify(poema));
-    document.getElementById("poema_form").reset()
+
+    try {
+        await push(ref(db, "poemas"), new_poema);
+        alert("Poema salvo no banco de dados.");
+        document.getElementById("poema_form").reset();
+    } catch (error) {
+        console.error("Erro ao salvar:", error);
+        alert("Erro ao salvar no banco.");
+    }
 }
